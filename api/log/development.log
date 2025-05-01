@@ -637,3 +637,42 @@ Processing by RestaurantsController#search as */*
 Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 11:48:59 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 23ms (Views: 13.7ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 11:49:07 +0800
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (3.5ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 20ms (Views: 15.5ms | ActiveRecord: 3.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 11:49:16 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 9ms (Views: 6.7ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=Korean" for 127.0.0.1 at 2025-05-01 11:49:22 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "Korean"}
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'Korean' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 11:49:35 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+

@@ -37,7 +37,7 @@ bin/rails credentials:edit
 api_key: "your-api-key"
 ```
 
-When testing with Postman, select Auth Type: "API Key" and set the key to "X-API-KEY"
+Add or change the api_key in the yaml file. When testing with Postman, select Auth Type: "API Key" and set the key to "X-API-KEY"
 
 ## API Requests and Responses
 
