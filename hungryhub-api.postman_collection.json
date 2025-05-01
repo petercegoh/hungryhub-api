@@ -1,0 +1,871 @@
+{
+	"info": {
+		"_postman_id": "7b4c443f-b649-4e99-b01a-e3aeed4d7539",
+		"name": "hungryhub-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34786383"
+	},
+	"item": [
+		{
+			"name": "index",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Response has the required fields', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function (restaurant) {",
+							"        pm.expect(restaurant).to.have.property('id');",
+							"        pm.expect(restaurant).to.have.property('name');",
+							"        pm.expect(restaurant).to.have.property('address');",
+							"        pm.expect(restaurant).to.have.property('cuisine_type');",
+							"        pm.expect(restaurant).to.have.property('created_at');",
+							"        pm.expect(restaurant).to.have.property('updated_at');",
+							"    });",
+							"})",
+							"",
+							"pm.test('Verify that created_at and updated_at fields are in a valid date format', function () {",
+							"    const responseData = pm.response.json();",
+							"    responseData.forEach(function (item) {",
+							"        pm.expect(item.created_at).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/, 'created_at should be in valid date format');",
+							"        pm.expect(item.updated_at).to.match(/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$/, 'updated_at should be in valid date format');",
+							"    });",
+							"})",
+							"",
+							"pm.test('Content-Type header is application/json', function () {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "77e06281-564e-4cda-ad2b-7aed7255552c",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-API-KEY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer: 77e06281-564e-4cda-ad2b-7aed7255552c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:3000/restaurants",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"restaurants"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "index_valid",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/restaurants",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"restaurants"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"1ff6a12b54ffc51a38031a53aa666b76\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "6f622e2e-13f5-41aa-a58d-99e328bf6fef"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.015063"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=0.20, instantiation.active_record;dur=0.04, process_action.action_controller;dur=5.96"
+						},
+						{
+							"key": "Content-Length",
+							"value": "927"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Resto 1\",\n        \"address\": \"1 Smith Street\",\n        \"cuisine_type\": \"Thai\",\n        \"created_at\": \"2025-04-30T09:32:44.297Z\",\n        \"updated_at\": \"2025-04-30T09:32:44.297Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Resto 2\",\n        \"address\": \"1 Mount Street\",\n        \"cuisine_type\": \"Japanese\",\n        \"created_at\": \"2025-04-30T09:33:15.770Z\",\n        \"updated_at\": \"2025-04-30T09:33:15.770Z\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Resto 3\",\n        \"address\": \"1 Sad Street\",\n        \"cuisine_type\": \"French\",\n        \"created_at\": \"2025-04-30T09:37:43.145Z\",\n        \"updated_at\": \"2025-04-30T09:37:43.145Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Resto 4\",\n        \"address\": \"1 Plastic Street\",\n        \"cuisine_type\": \"Korean\",\n        \"created_at\": \"2025-05-01T02:40:43.293Z\",\n        \"updated_at\": \"2025-05-01T02:40:43.293Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Resto 3\",\n        \"address\": \"\",\n        \"cuisine_type\": \"French\",\n        \"created_at\": \"2025-05-01T02:52:27.414Z\",\n        \"updated_at\": \"2025-05-01T02:52:27.414Z\"\n    },\n    {\n        \"id\": 6,\n        \"name\": \"Resto 3\",\n        \"address\": \"1 Sad Street\",\n        \"cuisine_type\": \"French\",\n        \"created_at\": \"2025-05-01T02:58:06.785Z\",\n        \"updated_at\": \"2025-05-01T02:58:06.785Z\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 201\", function () {",
+							"    pm.expect(pm.response.code).to.equal(201);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the required fields\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData).to.include.all.keys('id', 'name', 'address', 'cuisine_type', 'created_at', 'updated_at');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Name is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Address should be a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.address).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Cuisine_type is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.cuisine_type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Cuisine_type should not be empty\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "X-API-KEY",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "77e06281-564e-4cda-ad2b-7aed7255552c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/restaurants?name=Resto 3&address=1 Sad Street&cuisine_type=French",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"restaurants"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Resto 3"
+						},
+						{
+							"key": "address",
+							"value": "1 Sad Street"
+						},
+						{
+							"key": "cuisine_type",
+							"value": "French"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create_valid",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/restaurants?name=Resto 4&address=1 Plastic Street&cuisine_type=Korean",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"restaurants"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Resto 4"
+								},
+								{
+									"key": "address",
+									"value": "1 Plastic Street"
+								},
+								{
+									"key": "cuisine_type",
+									"value": "Korean"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"d2f7c49cf987f7b7de3ea9ecf8fa1c46\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "c046b0d8-6ec4-41a8-9fe6-ffe164148dd4"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.039398"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.00, sql.active_record;dur=2.59, start_transaction.active_record;dur=0.00, transaction.active_record;dur=4.07, process_action.action_controller;dur=24.65"
+						},
+						{
+							"key": "Content-Length",
+							"value": "158"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 4,\n    \"name\": \"Resto 4\",\n    \"address\": \"1 Plastic Street\",\n    \"cuisine_type\": \"Korean\",\n    \"created_at\": \"2025-05-01T02:40:43.293Z\",\n    \"updated_at\": \"2025-05-01T02:40:43.293Z\"\n}"
+				},
+				{
+					"name": "create_invalid_no_name",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/restaurants?name=&address=1 Calculus Street&cuisine_type=Mexican",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"restaurants"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								},
+								{
+									"key": "address",
+									"value": "1 Calculus Street"
+								},
+								{
+									"key": "cuisine_type",
+									"value": "Mexican"
+								}
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "x-request-id",
+							"value": "dc5cc597-926d-4458-8bfa-99cc6a79ff20"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.104485"
+						},
+						{
+							"key": "server-timing",
+							"value": "sql.active_record;dur=6.29, start_processing.action_controller;dur=0.00, process_action.action_controller;dur=21.01"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errors\": [\n        \"Name can't be blank\"\n    ]\n}"
+				},
+				{
+					"name": "create_invalid_no_cusine_type",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/restaurants?name=Resto 3&address=1 Sad Street&cuisine_type=French",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"restaurants"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Resto 3"
+								},
+								{
+									"key": "address",
+									"value": "1 Sad Street"
+								},
+								{
+									"key": "cuisine_type",
+									"value": "French"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "create_valid_no_addr",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/restaurants?name=Resto 3&address=1 Sad Street&cuisine_type=French",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"restaurants"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Resto 3"
+								},
+								{
+									"key": "address",
+									"value": "1 Sad Street"
+								},
+								{
+									"key": "cuisine_type",
+									"value": "French"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response status code is 200', function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"})",
+							"",
+							"pm.test('Response has the required fields', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function (item) {",
+							"        pm.expect(item).to.have.property('id');",
+							"        pm.expect(item).to.have.property('name');",
+							"        pm.expect(item).to.have.property('address');",
+							"        pm.expect(item).to.have.property('cuisine_type');",
+							"        pm.expect(item).to.have.property('created_at');",
+							"        pm.expect(item).to.have.property('updated_at');",
+							"    });",
+							"})",
+							"",
+							"pm.test('Cuisine type matches the requested cuisine type \\'French\\'', function () {",
+							"    const responseData = pm.response.json();",
+							"    responseData.forEach(function (restaurant) {",
+							"        pm.expect(restaurant.cuisine_type).to.equal('French');",
+							"    });",
+							"})",
+							"",
+							"pm.test('Content-Type header is application/json', function () {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "77e06281-564e-4cda-ad2b-7aed7255552c",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "X-API-KEY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:3000/restaurants/search?cuisine_type=French",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"restaurants",
+						"search"
+					],
+					"query": [
+						{
+							"key": "cuisine_type",
+							"value": "French"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "search_valid",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/restaurants/search?cuisine_type=French",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"restaurants",
+								"search"
+							],
+							"query": [
+								{
+									"key": "cuisine_type",
+									"value": "French"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"367e7d7d9d5c2949850744d5baa2ba39\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "ca835b95-4b9e-446c-a811-af45f87b7445"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.015250"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.01, sql.active_record;dur=0.09, instantiation.active_record;dur=0.02, process_action.action_controller;dur=2.77"
+						},
+						{
+							"key": "Content-Length",
+							"value": "299"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 3,\n        \"name\": \"Resto 3\",\n        \"address\": \"1 Sad Street\",\n        \"cuisine_type\": \"French\",\n        \"created_at\": \"2025-04-30T09:37:43.145Z\",\n        \"updated_at\": \"2025-04-30T09:37:43.145Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Resto 3\",\n        \"address\": \"\",\n        \"cuisine_type\": \"French\",\n        \"created_at\": \"2025-05-01T02:52:27.414Z\",\n        \"updated_at\": \"2025-05-01T02:52:27.414Z\"\n    }\n]"
+				},
+				{
+					"name": "search_invalid_no_match",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/restaurants/search?cuisine_type=Singaporean",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"restaurants",
+								"search"
+							],
+							"query": [
+								{
+									"key": "cuisine_type",
+									"value": "Singaporean"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"4f53cda18c2baa0c0354bb5f9a3ecbe5\""
+						},
+						{
+							"key": "cache-control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "x-request-id",
+							"value": "99abf398-800f-4729-98bc-dca7a66d5f9f"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.011510"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.00, sql.active_record;dur=0.06, process_action.action_controller;dur=0.84"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				},
+				{
+					"name": "search_invalid_no_cuisine_type",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/restaurants/search",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"restaurants",
+								"search"
+							],
+							"query": [
+								{
+									"key": "cuisine_type",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "0"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "vary",
+							"value": "Accept"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "x-request-id",
+							"value": "6db4a02c-f335-4bbd-aa5b-260d85daa785"
+						},
+						{
+							"key": "x-runtime",
+							"value": "0.010553"
+						},
+						{
+							"key": "server-timing",
+							"value": "start_processing.action_controller;dur=0.02, process_action.action_controller;dur=1.81"
+						},
+						{
+							"key": "Content-Length",
+							"value": "46"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"cuisine_type parameter is required\"\n}"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,639 @@
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='HungryhubApi'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-04-30 03:59:51.164497', '2025-04-30 03:59:51.164498') RETURNING "key" /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+Migrating to CreateRestaurants (20250430035914)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='HungryhubApi'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "restaurants" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "address" varchar, "cuisine_type" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250430035914') RETURNING "version" /*application='HungryhubApi'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+Started GET "/restaurants" for 127.0.0.1 at 2025-04-30 17:21:50 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (0.9ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 22ms (Views: 1.0ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants?name=Resto%201&address=1%20Smith%20Street&cusine_type=Thai" for 127.0.0.1 at 2025-04-30 17:25:30 +0800
+Processing by RestaurantsController#index as */*
+  Parameters: {"name" => "Resto 1", "address" => "1 Smith Street", "cusine_type" => "Thai"}
+  [1m[36mRestaurant Load (0.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=Resto%201&address=1%20Smith%20Street&cusine_type=Thai" for 127.0.0.1 at 2025-04-30 17:26:04 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 1", "address" => "1 Smith Street", "cusine_type" => "Thai"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty or invalid: restaurant):
+  
+app/controllers/restaurants_controller.rb:29:in 'RestaurantsController#restaurant_params'
+app/controllers/restaurants_controller.rb:8:in 'RestaurantsController#create'
+  [1m[36mRestaurant Load (14.8ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /* loading for pp */ LIMIT 11 /*application='HungryhubApi'*/[0m
+Started POST "/restaurants?name=Resto%201&address=1%20Smith%20Street&cusine_type=Thai" for 127.0.0.1 at 2025-04-30 17:32:28 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 1", "address" => "1 Smith Street", "cusine_type" => "Thai"}
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty or invalid: cuisine_type):
+  
+app/controllers/restaurants_controller.rb:30:in 'RestaurantsController#restaurant_params'
+app/controllers/restaurants_controller.rb:8:in 'RestaurantsController#create'
+Started POST "/restaurants?name=Resto%201&address=1%20Smith%20Street&cuisine_type=Thai" for 127.0.0.1 at 2025-04-30 17:32:44 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 1", "address" => "1 Smith Street", "cuisine_type" => "Thai"}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mRestaurant Create (4.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "cuisine_type", "created_at", "updated_at") VALUES ('Resto 1', '1 Smith Street', 'Thai', '2025-04-30 09:32:44.297908', '2025-04-30 09:32:44.297908') RETURNING "id" /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+Completed 201 Created in 42ms (Views: 2.5ms | ActiveRecord: 11.0ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+  [1m[36mRestaurant Load (1.8ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /* loading for pp */ LIMIT 11 /*application='HungryhubApi'*/[0m
+Started POST "/restaurants?name=Resto%202&address=1%20Mount%20Street&cuisine_type=Japanese" for 127.0.0.1 at 2025-04-30 17:33:15 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 2", "address" => "1 Mount Street", "cuisine_type" => "Japanese"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mRestaurant Create (1.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "cuisine_type", "created_at", "updated_at") VALUES ('Resto 2', '1 Mount Street', 'Japanese', '2025-04-30 09:33:15.770992', '2025-04-30 09:33:15.770992') RETURNING "id" /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+Completed 201 Created in 12ms (Views: 0.2ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /* loading for pp */ LIMIT 11 /*application='HungryhubApi'*/[0m
+Started GET "/restaurants" for 127.0.0.1 at 2025-04-30 17:34:22 +0800
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 21ms (Views: 18.6ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search" for 127.0.0.1 at 2025-04-30 17:34:43 +0800
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for RestaurantsController):
+  
+actionpack (8.0.2) lib/abstract_controller/base.rb:158:in 'AbstractController::Base#process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in 'ActionController::Metal#dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in 'ActionController::Metal.dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in 'ActionDispatch::Routing::RouteSet::Dispatcher#dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in 'Rails::Engine::LazyRouteSet#call'
+rack (3.1.13) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+rack (3.1.13) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+rack (3.1.13) lib/rack/head.rb:15:in 'Rack::Head#call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.1.13) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.1.13) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.2) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (6.6.0) lib/puma/configuration.rb:279:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (6.6.0) lib/puma/request.rb:99:in 'block in Puma::Request#handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in 'Puma::ThreadPool#with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in 'Puma::Request#handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in 'Puma::Server#process_client'
+puma (6.6.0) lib/puma/server.rb:254:in 'block in Puma::Server#run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in 'block in Puma::ThreadPool#spawn_thread'
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+Started POST "/restaurants?name=Resto%203&address=1%20Sad%20Street&cuisine_type=French" for 127.0.0.1 at 2025-04-30 17:37:43 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 3", "address" => "1 Sad Street", "cuisine_type" => "French"}
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mRestaurant Create (4.7ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "cuisine_type", "created_at", "updated_at") VALUES ('Resto 3', '1 Sad Street', 'French', '2025-04-30 09:37:43.145366', '2025-04-30 09:37:43.145366') RETURNING "id" /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+Completed 201 Created in 25ms (Views: 1.1ms | ActiveRecord: 6.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search" for 127.0.0.1 at 2025-04-30 17:37:53 +0800
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for RestaurantsController):
+  
+actionpack (8.0.2) lib/abstract_controller/base.rb:158:in 'AbstractController::Base#process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in 'ActionController::Metal#dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in 'ActionController::Metal.dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in 'ActionDispatch::Routing::RouteSet::Dispatcher#dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in 'Rails::Engine::LazyRouteSet#call'
+rack (3.1.13) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+rack (3.1.13) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+rack (3.1.13) lib/rack/head.rb:15:in 'Rack::Head#call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.1.13) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.1.13) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.2) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (6.6.0) lib/puma/configuration.rb:279:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (6.6.0) lib/puma/request.rb:99:in 'block in Puma::Request#handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in 'Puma::ThreadPool#with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in 'Puma::Request#handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in 'Puma::Server#process_client'
+puma (6.6.0) lib/puma/server.rb:254:in 'block in Puma::Server#run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-04-30 17:39:03 +0800
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for RestaurantsController):
+  
+actionpack (8.0.2) lib/abstract_controller/base.rb:158:in 'AbstractController::Base#process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in 'ActionController::Metal#dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in 'ActionController::Metal.dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in 'ActionDispatch::Routing::RouteSet::Dispatcher#dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in 'Rails::Engine::LazyRouteSet#call'
+rack (3.1.13) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+rack (3.1.13) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+rack (3.1.13) lib/rack/head.rb:15:in 'Rack::Head#call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.1.13) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.1.13) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.2) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (6.6.0) lib/puma/configuration.rb:279:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (6.6.0) lib/puma/request.rb:99:in 'block in Puma::Request#handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in 'Puma::ThreadPool#with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in 'Puma::Request#handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in 'Puma::Server#process_client'
+puma (6.6.0) lib/puma/server.rb:254:in 'block in Puma::Server#run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-04-30 17:41:23 +0800
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for RestaurantsController):
+  
+actionpack (8.0.2) lib/abstract_controller/base.rb:158:in 'AbstractController::Base#process'
+actionpack (8.0.2) lib/action_controller/metal.rb:252:in 'ActionController::Metal#dispatch'
+actionpack (8.0.2) lib/action_controller/metal.rb:335:in 'ActionController::Metal.dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:67:in 'ActionDispatch::Routing::RouteSet::Dispatcher#dispatch'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:50:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.2) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+actionpack (8.0.2) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+railties (8.0.2) lib/rails/engine/lazy_route_set.rb:68:in 'Rails::Engine::LazyRouteSet#call'
+rack (3.1.13) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+rack (3.1.13) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+rack (3.1.13) lib/rack/head.rb:15:in 'Rack::Head#call'
+activerecord (8.0.2) lib/active_record/migration.rb:671:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.2) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.2) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.2) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.2) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.1.13) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.2) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.1.13) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.2) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.2) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (6.6.0) lib/puma/configuration.rb:279:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (6.6.0) lib/puma/request.rb:99:in 'block in Puma::Request#handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in 'Puma::ThreadPool#with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in 'Puma::Request#handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in 'Puma::Server#process_client'
+puma (6.6.0) lib/puma/server.rb:254:in 'block in Puma::Server#run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in 'block in Puma::ThreadPool#spawn_thread'
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-04-30 17:41:47 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.0ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 19ms (Views: 7.6ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-04-30 17:55:53 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-04-30 17:56:37 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-04-30 17:56:51 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-04-30 18:01:58 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-04-30 18:02:58 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-04-30 18:03:58 +0800
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (1.4ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 40ms (Views: 13.7ms | ActiveRecord: 5.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-04-30 18:14:28 +0800
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (4.7ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 31ms (Views: 23.1ms | ActiveRecord: 4.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=Resto%203&address=1%20Sad%20Street&cuisine_type=French" for 127.0.0.1 at 2025-04-30 18:14:35 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 3", "address" => "1 Sad Street", "cuisine_type" => "French"}
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-04-30 18:14:38 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-04-30 18:14:43 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 10:38:29 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 10:39:06 +0800
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (8.5ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 18ms (Views: 7.3ms | ActiveRecord: 8.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 10:39:29 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=Resto%204&address=1%20Plastic%20Street&cuisine_type=Korean" for 127.0.0.1 at 2025-05-01 10:40:43 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 4", "address" => "1 Plastic Street", "cuisine_type" => "Korean"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mRestaurant Create (2.1ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "cuisine_type", "created_at", "updated_at") VALUES ('Resto 4', '1 Plastic Street', 'Korean', '2025-05-01 02:40:43.293178', '2025-05-01 02:40:43.293178') RETURNING "id" /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+Completed 201 Created in 25ms (Views: 2.1ms | ActiveRecord: 2.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=&address=1%20Calculus%20Street&cuisine_type=Mexican" for 127.0.0.1 at 2025-05-01 10:42:14 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "", "address" => "1 Calculus Street", "cuisine_type" => "Mexican"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty or invalid: name):
+  
+app/controllers/restaurants_controller.rb:29:in 'RestaurantsController#restaurant_params'
+app/controllers/restaurants_controller.rb:8:in 'RestaurantsController#create'
+Started POST "/restaurants?name=&address=1%20Calculus%20Street&cuisine_type=Mexican" for 127.0.0.1 at 2025-05-01 10:50:50 +0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='HungryhubApi'*/[0m
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "", "address" => "1 Calculus Street", "cuisine_type" => "Mexican"}
+Completed 422 Unprocessable Content in 21ms (Views: 0.1ms | ActiveRecord: 0.9ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=Resto%203&address=1%20Sad%20Street&cuisine_type=" for 127.0.0.1 at 2025-05-01 10:51:43 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 3", "address" => "1 Sad Street", "cuisine_type" => ""}
+Completed 422 Unprocessable Content in 19ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=Resto%203&address=&cuisine_type=French" for 127.0.0.1 at 2025-05-01 10:52:27 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 3", "address" => "", "cuisine_type" => "French"}
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mRestaurant Create (7.7ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "cuisine_type", "created_at", "updated_at") VALUES ('Resto 3', '', 'French', '2025-05-01 02:52:27.414260', '2025-05-01 02:52:27.414260') RETURNING "id" /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+Completed 201 Created in 19ms (Views: 1.2ms | ActiveRecord: 11.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 10:52:41 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 16ms (Views: 4.7ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=Singaporean" for 127.0.0.1 at 2025-05-01 10:53:15 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "Singaporean"}
+  [1m[36mRestaurant Load (0.8ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'Singaporean' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 12ms (Views: 9.9ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 10:53:50 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 18ms (Views: 15.7ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=Singaporean" for 127.0.0.1 at 2025-05-01 10:53:56 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "Singaporean"}
+  [1m[36mRestaurant Load (0.6ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'Singaporean' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search" for 127.0.0.1 at 2025-05-01 10:54:19 +0800
+Processing by RestaurantsController#search as */*
+Completed 400 Bad Request in 2ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 10:54:41 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 10:54:54 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=Singaporean" for 127.0.0.1 at 2025-05-01 10:55:08 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "Singaporean"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'Singaporean' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search" for 127.0.0.1 at 2025-05-01 10:55:15 +0800
+Processing by RestaurantsController#search as */*
+Completed 400 Bad Request in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 10:58:06 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=Resto%203&address=1%20Sad%20Street&cuisine_type=French" for 127.0.0.1 at 2025-05-01 10:58:06 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 3", "address" => "1 Sad Street", "cuisine_type" => "French"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mRestaurant Create (0.5ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "cuisine_type", "created_at", "updated_at") VALUES ('Resto 3', '1 Sad Street', 'French', '2025-05-01 02:58:06.785850', '2025-05-01 02:58:06.785850') RETURNING "id" /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+Completed 201 Created in 7ms (Views: 0.7ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 10:58:06 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 10:58:36 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 10:58:46 +0800
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 11:00:12 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=Resto%203&address=1%20Sad%20Street&cuisine_type=French" for 127.0.0.1 at 2025-05-01 11:00:12 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 3", "address" => "1 Sad Street", "cuisine_type" => "French"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mRestaurant Create (2.1ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "cuisine_type", "created_at", "updated_at") VALUES ('Resto 3', '1 Sad Street', 'French', '2025-05-01 03:00:12.553956', '2025-05-01 03:00:12.553956') RETURNING "id" /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+Completed 201 Created in 6ms (Views: 0.3ms | ActiveRecord: 2.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 11:00:12 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (1.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 9ms (Views: 9.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 11:00:20 +0800
+Processing by RestaurantsController#index as */*
+Filter chain halted as :authenticate_api_key! rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 11:00:40 +0800
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search" for 127.0.0.1 at 2025-05-01 11:01:24 +0800
+Processing by RestaurantsController#search as */*
+Completed 400 Bad Request in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 11:01:50 +0800
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 12ms (Views: 11.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=Resto%203&address=1%20Sad%20Street&cuisine_type=French" for 127.0.0.1 at 2025-05-01 11:01:50 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 3", "address" => "1 Sad Street", "cuisine_type" => "French"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mRestaurant Create (1.2ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "cuisine_type", "created_at", "updated_at") VALUES ('Resto 3', '1 Sad Street', 'French', '2025-05-01 03:01:50.905663', '2025-05-01 03:01:50.905663') RETURNING "id" /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+Completed 201 Created in 6ms (Views: 0.1ms | ActiveRecord: 2.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 11:01:50 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 4ms (Views: 3.4ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants" for 127.0.0.1 at 2025-05-01 11:04:52 +0800
+Processing by RestaurantsController#index as */*
+  [1m[36mRestaurant Load (0.6ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" /*action='index',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:4:in 'RestaurantsController#index'
+Completed 200 OK in 3ms (Views: 1.5ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/restaurants?name=Resto%203&address=1%20Sad%20Street&cuisine_type=French" for 127.0.0.1 at 2025-05-01 11:04:52 +0800
+Processing by RestaurantsController#create as */*
+  Parameters: {"name" => "Resto 3", "address" => "1 Sad Street", "cuisine_type" => "French"}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mRestaurant Create (1.0ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "cuisine_type", "created_at", "updated_at") VALUES ('Resto 3', '1 Sad Street', 'French', '2025-05-01 03:04:52.338213', '2025-05-01 03:04:52.338213') RETURNING "id" /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:11:in 'RestaurantsController#create'
+Completed 201 Created in 5ms (Views: 0.1ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/restaurants/search?cuisine_type=French" for 127.0.0.1 at 2025-05-01 11:04:52 +0800
+Processing by RestaurantsController#search as */*
+  Parameters: {"cuisine_type" => "French"}
+  [1m[36mRestaurant Load (0.1ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" WHERE "restaurants"."cuisine_type" = 'French' /*action='search',application='HungryhubApi',controller='restaurants'*/[0m
+  ↳ app/controllers/restaurants_controller.rb:21:in 'RestaurantsController#search'
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
